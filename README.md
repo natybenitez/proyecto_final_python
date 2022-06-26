@@ -3,7 +3,7 @@
 
 ### Descarga
     Desde una consola o mediante git bash utilizar el siguiente comando
-        git clone https://github.com/natybenitez/entrega-proyecto-final.git
+        git clone https://github.com/natybenitez/proyecto_final_python.git
         
 ### Instalacion:
     pip install -r requirements.txt
