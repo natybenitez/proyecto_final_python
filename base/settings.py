@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,7 +39,8 @@ BASE_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_countries',
-    #'ckeditor',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MY_APPS = [
@@ -68,7 +70,7 @@ ROOT_URLCONF = 'base.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates',)],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -137,3 +139,20 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Added on app development
+STATIC_URL = '/static/'
+MEDIA_ROOT = ''
+MEDIA_URL = '/media/'
+STATIC_ROOT = 'static'
+
+
+# CKEditor settings
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+#This ensures you have all toolbar icons
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None, 
+        },
+    }
