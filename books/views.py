@@ -13,3 +13,9 @@ def books(request):
     books = Book.objects.all()
     context = {'books': books}
     return render(request, 'books.html', context=context)
+
+def create_book(request):
+    return render(request, 'create_book.html')
+
+def create_writer(request):
+    return render(request, 'create_writer.html')

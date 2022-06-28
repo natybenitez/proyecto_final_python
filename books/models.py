@@ -7,7 +7,7 @@ from django import forms
 #from django.urls import reverse
 
 # Third party app imports
-from ckeditor_uploader.fields import RichTextUploadingField
+from ckeditor.fields import RichTextField
 
 class Category(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False)
@@ -26,7 +26,7 @@ class Writer(models.Model):
     name = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
     #image = models.ImageField(default='profile-pic-default.jpg', upload_to='profile_pics')
-    bio = RichTextUploadingField(blank=True, help_text="Agrega información sobre este/a autor/a")
+    bio = RichTextField(blank=True, help_text="Agrega información sobre este/a autor/a")
     country = CountryField()
 
     twitter_url = models.CharField(max_length=250, default="#",
@@ -59,6 +59,6 @@ class Book(models.Model):
         verbose_name_plural = 'libros'
 
     def __str__(self):
-        return self.name
+        return self.book_name
 
 
