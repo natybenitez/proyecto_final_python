@@ -26,12 +26,13 @@ class Writer(models.Model):
     name = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
     #image = models.ImageField(default='profile-pic-default.jpg', upload_to='profile_pics')
-    bio = RichTextField(blank=True, help_text="Agrega información sobre este/a autor/a")
-    country = CountryField()
+    bio = RichTextField(blank=False, help_text="Agrega información sobre este/a autor/a")
+    country = CountryField(blank=False)
 
-    twitter_url = models.CharField(max_length=250, default="#",
+    twitter_url = models.CharField(help_text= "Ingresa # si el escritor/a no posee una cuenta",
+                                    max_length=250, default="#",
                                    blank=True, null=True,
-                                   help_text= "Ingresa # si el escritor/a no posee una cuenta")
+                                   )
     instagram_url = models.CharField(max_length=250, default="#",
                                      blank=True, null=True,
                                      help_text= "Ingresa # si el escritor/a no posee una cuenta")

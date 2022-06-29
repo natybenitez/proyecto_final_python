@@ -1,5 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Aca vamos a cargar los autores nuevos</h1>
+
+{% if form %}
+    <h1>Aca vamos a cargar los autores nuevos</h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <input type="submit" value="enviar">
+    </form>
+
+{% elif new_writer %}
+
+    <p>{{new_writer.name}}</p>
+    <p>{{new_writer.lastname}}</p>
+    <p>{{new_writer.web_url}}</p>
+
+{% endif %}
+
 {% endblock %}
