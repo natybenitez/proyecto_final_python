@@ -19,6 +19,12 @@
     <p>{{new_writer.lastname}}</p>
     <p>{{new_writer.web_url}}</p>
 
+    {% elif errors %}
+
+    <div style='color: red'>
+        {{errors}}
+    </div>
+
 {% endif %}
 
 {% endblock %}

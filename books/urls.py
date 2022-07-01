@@ -1,5 +1,5 @@
 from django.urls import path, include, re_path
-from books.views import writers, books, create_book, create_writer, search_writer_view
+from books.views import writers, books, create_book, create_writer, search_writer_view, writer_details
 
 urlpatterns = [
     
@@ -8,6 +8,7 @@ urlpatterns = [
     path('create-book/', create_book, name='create_book'),
     path('create-writer/', create_writer, name='create_writer'),
     path('search-writer/', search_writer_view, name='search_writer_view'),
+    path('writer-details/<int:pk>/', writer_details, name='writer_details'),
     #path('<slug:slug>,<int:id>/', views.article_detail, name='article'),
     re_path(r'^ckeditor/', include('ckeditor_uploader.urls')),
 

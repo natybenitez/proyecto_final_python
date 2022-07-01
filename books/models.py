@@ -23,7 +23,7 @@ class Category(models.Model):
 
 
 class Writer(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, verbose_name='nombre')
     lastname = models.CharField(max_length=100)
     #image = models.ImageField(default='profile-pic-default.jpg', upload_to='profile_pics')
     bio = RichTextField(blank=False, help_text="Agrega información sobre este/a autor/a")
@@ -37,15 +37,18 @@ class Writer(models.Model):
                                      blank=True, null=True,
                                      help_text= "Ingresa # si el escritor/a no posee una cuenta")
     
-    web_url = models.URLField()
+    web_url = models.URLField(blank=True, verbose_name="Web Oficial")
+
     
     class Meta:
+        unique_together = ('name', 'lastname',)
         verbose_name = 'autor'
         verbose_name_plural = 'autores'
 
     def __str__(self):
         return "%s %s" % (self.name, self.lastname)
 
+    
 
 class Book(models.Model):
     book_name = models.CharField(max_length=500)

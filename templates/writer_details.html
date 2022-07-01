@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="col-md-6 card w-100">
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="col p-4 d-flex flex-column position-static">
+        <h3 class="mb-0">{{writer.name}} {{writer.lastname}}</h3>
+        <div class="mb-1 text-muted">{{writer.country}}</div>
+        <p class="card-text mb-auto">{{writer.bio |safe}}</p>
+        <a href="#" class="stretched-link">Continue reading</a>
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}

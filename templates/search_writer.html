@@ -7,8 +7,17 @@
     {% for writer in writers %}
     <h2>{{writer.name}} {{writer.lastname}}</h2>
     <h2></h2>
-    <!---ACA NO ME ESTA TRAYENDO NADA-->
+    
     <h2> {{writer.country}}</h2>
-    <h2> {{writer.web_url}}</h2>
+    
+    
+   
+                {% if writer.web_url %}
+                    <p><a href="{{writer.web_url}}" target="_blank">{{writer.web_url}}</a></p>
+                {% endif %}
+
     {% endfor %}
+
+    {{errors}}
+
 {% endblock %}

@@ -18,3 +18,5 @@ class Writer_form(forms.ModelForm):
         model = Writer
         fields = '__all__' #si quiero todo
         #fields = ('name', 'lastname', 'country')  #si quiero solo algunos
+
+    
