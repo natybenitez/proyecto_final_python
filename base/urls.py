@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from base.views import  index, contact
 
+
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -27,6 +28,7 @@ urlpatterns = [
     path('contact/', contact, name='contact'),
     path('admin/', admin.site.urls),
     path('', include('books.urls')),
+    path('', include('posts.urls')),
     
     #path('post/', posts, name='post'),
     #path('<slug:slug>,<int:id>/', views.article_detail, name='article'),

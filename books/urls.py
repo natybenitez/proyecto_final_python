@@ -1,6 +1,7 @@
 from django.urls import path, include, re_path
 from books.views import writers, books, create_book, create_writer, search_writer_view, writer_details
 
+
 urlpatterns = [
     
     path('books/', books, name='books'),

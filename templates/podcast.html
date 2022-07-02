@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+Podcast
+{% endblock %}
+
+{% block content %}
+
+
+<div class="row mb-2">
+
+  {% for podcast in podcasts %}
+  <div class="col-md-3">
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="col p-4 d-flex flex-column position-static">
+        <h5 class="mb-0">{{podcast.name}}</h5>
+        <div class="mb-1 text-muted">{{podcast.library}}</div>
+        {{podcast.iframe | safe }}
+
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+
+
+
+
+
+
+{% endblock %}

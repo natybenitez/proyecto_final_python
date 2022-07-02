@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "writer.html" %}
 
 {% block content %}
 
@@ -8,11 +8,9 @@
         <h3 class="mb-0">{{writer.name}} {{writer.lastname}}</h3>
         <div class="mb-1 text-muted">{{writer.country}}</div>
         <p class="card-text mb-auto">{{writer.bio |safe}}</p>
-        <a href="#" class="stretched-link">Continue reading</a>
+        <a href="/delete-writer/{{writer.id}}" class="card-link-danger" style="color:#FF0000;">Eliminar</a>
       </div>
     </div>
   </div>
-
-
 
 {% endblock %}

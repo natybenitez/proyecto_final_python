@@ -11,6 +11,7 @@ from books.models import Category
 
 # Third party app imports
 from ckeditor_uploader.fields import RichTextUploadingField
+
 #from taggit.managers import TaggableManager
 
 class Posts(models.Model):
@@ -61,3 +62,14 @@ class Posts(models.Model):
     def get_absolute_url(self):
         return reverse('blog:article_detail', kwargs={'username': self.author.username.lower(), 'slug': self.slug})'''
 
+class Podcast(models.Model):
+    name = models.CharField(max_length=100, unique=True, verbose_name='nombre')
+    library = models.CharField(max_length=100, verbose_name='libreria')
+    iframe = models.CharField(max_length=1000,null=False, blank=False)
+
+    class Meta:
+        verbose_name = 'podcast'
+        verbose_name_plural = 'podcasts'
+
+    def __str__(self):
+        return "%s" % (self.name)
