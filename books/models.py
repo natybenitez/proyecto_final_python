@@ -24,21 +24,16 @@ class Category(models.Model):
 
 class Writer(models.Model):
     name = models.CharField(max_length=100, verbose_name='nombre')
-    lastname = models.CharField(max_length=100)
-    #image = models.ImageField(default='profile-pic-default.jpg', upload_to='profile_pics')
-    bio = RichTextField(blank=False, help_text="Agrega información sobre este/a autor/a")
-    country = CountryField(blank=False)
-
-    twitter_url = models.CharField(help_text= "Ingresa # si el escritor/a no posee una cuenta",
-                                    max_length=250, default="#",
-                                   blank=True, null=True,
-                                   )
-    instagram_url = models.CharField(max_length=250, default="#",
-                                     blank=True, null=True,
-                                     help_text= "Ingresa # si el escritor/a no posee una cuenta")
+    lastname = models.CharField(max_length=100, verbose_name='apellido')
     
-    web_url = models.URLField(blank=True, verbose_name="Web Oficial")
+    bio = RichTextField(blank=False, verbose_name='Biografía')
+    #help_text="Agrega información sobre este/a autor/a"
+    country = CountryField(blank=False, verbose_name='país')
+    
+    web_url = models.URLField(blank=True, verbose_name="web oficial")
 
+    image = models.ImageField(upload_to = 'writers-gallery', default='default.jpg', verbose_name='Fotografía' )
+    
     
     class Meta:
         unique_together = ('name', 'lastname',)
@@ -54,6 +49,7 @@ class Book(models.Model):
     book_name = models.CharField(max_length=500)
     year_published = models.IntegerField()
     publisher = models.CharField(max_length=100, null=False, blank=False)
+    category = models.ForeignKey('Category', on_delete=models.CASCADE, related_name='books', null=True)
     #writer = models.ForeignKey(Writer, on_delete=models.CASCADE)
     #category= forms.ModelChoiceField(queryset=Category.objects.all(), initial=0)
     #category = models.ForeignKey('app_books.Category', on_delete=models.CASCADE)

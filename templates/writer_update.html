@@ -1,0 +1,30 @@
+{% extends "writer.html" %}
+
+{% block content %}
+
+{% if form %}
+    <h1>Aca vamos a cargar la actualización de datos</h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <input type="submit" value="enviar">
+    </form>
+
+{% elif new_writer %}
+
+    <p>{{new_writer.name}}</p>
+    <p>{{new_writer.lastname}}</p>
+    <p>{{new_writer.web_url}}</p>
+
+    {% elif errors %}
+
+    <div style='color: red'>
+        {{errors}}
+    </div>
+
+{% endif %}
+
+{% endblock %}

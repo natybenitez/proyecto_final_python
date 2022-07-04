@@ -1,50 +1,54 @@
 import ctypes
 from django.shortcuts import render
+from django.urls import reverse
 from books.models import Writer, Book
-from books.forms import Writer_form
-
-from django.http import HttpResponse
+from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+#from django.contrib import messages
+#from books.forms import Writer_form
+#from django.http import HttpResponse
+
+
+
 # Create your views here.
 
 # WRITERS #
 ## Writers list ##
-def writers(request):
-    writers = Writer.objects.all()
-    context = {'writers': writers}
-    return render(request, 'writer.html', context=context)
-
-## Create new writer ##
-def create_writer(request):
-    if request.method == 'GET':
-        form = Writer_form()
-        context = {'form': form}
-        return render(request, 'writer_new.html', context=context)
-    else:
-        form = Writer_form(request.POST)
-        if form.is_valid():
-            new_writer = Writer.objects.create(
-                name = form.cleaned_data['name'],
-                lastname = form.cleaned_data['lastname'],
-                twitter_url = form.cleaned_data['twitter_url'],
-                instagram_url = form.cleaned_data['instagram_url'],
-                web_url = form.cleaned_data['web_url'],
-            )
-            context = {'new_writer': new_writer}
-        else:
-            context = {'errors': form.errors}
-        return render(request, 'writer_new.html', context=context)
+class Writers(ListView):
+    model = Writer
+    template_name ='writer.html'
 
 ## Writer details ##
-def writer_details(request, pk):
-    try:
-        writer = Writer.objects.get(pk=pk)
-        context = {'writer': writer}
-        return render(request, 'writer_details.html', context=context)
-    except:
-        context = {'error':'El autor no existe'}
-        return render(request, 'writer.html', context=context)
+class Writer_details(DetailView):
+    model = Writer
+    template_name = 'writer_details.html'
 
+## Create new writer ##
+class Writer_new(LoginRequiredMixin, CreateView):
+    model = Writer
+    template_name = 'writer_new.html'
+    fields ='__all__'
+
+    def get_success_url(self):
+        return reverse('writer_details', kwargs={'pk': self.object.pk}) # writer_details es el name del path definida en urls
+
+## Delete writer ##
+class Writer_delete(DeleteView):
+    model = Writer
+    template_name = 'writer_delete.html'
+
+    def get_success_url(self):
+        return reverse('writers')
+
+## Update writer ##
+class Writer_update(UpdateView):
+    model = Writer
+    template_name = 'writer_update.html'
+    fields ='__all__'
+
+    def get_success_url(self):
+        return reverse('writer_details', kwargs={'pk': self.object.pk})
 
 # BOOKS #
 ## Books list ##

@@ -3,14 +3,26 @@
 {% block content %}
 
 <div class="col-md-6 card w-100">
-    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+    
       <div class="col p-4 d-flex flex-column position-static">
         <h3 class="mb-0">{{writer.name}} {{writer.lastname}}</h3>
-        <div class="mb-1 text-muted">{{writer.country}}</div>
-        <p class="card-text mb-auto">{{writer.bio |safe}}</p>
-        <a href="/delete-writer/{{writer.id}}" class="card-link-danger" style="color:#FF0000;">Eliminar</a>
+        <div class="mb-1 text-muted">{{writer.country}}</div><br>
+        <p class="card-text mb-auto">{{writer.bio |safe}}</p><br>
+        <ul class="nav col-mb-1 justify-content-end list-unstyled d-flex">
+          <li class="ms-3"><a class="text-muted" href="https://twitter.com/"><svg class="bi" width="24" height="24">
+                      <use xlink:href="#twitter"></use>
+                  </svg></a></li>
+          <li class="ms-3"><a class="text-muted" href="https://www.instagram.com/"><svg class="bi" width="24" height="24">
+                      <use xlink:href="#instagram"></use>
+                  </svg></a></li>
+          <li class="ms-3"><a class="text-muted" href="https://es-la.facebook.com/"><svg class="bi" width="24" height="24">
+                      <use xlink:href="#facebook"></use>
+                  </svg></a></li>
+      </ul><br>
+        <a href="/update-writer/{{writer.id}}/" class="card-link-danger" style="color:blue;">Editar</a>
+        <a href="/delete-writer/{{writer.id}}/" class="card-link-danger" style="color:red;">Eliminar</a>
       </div>
-    </div>
+    
   </div>
 
 {% endblock %}

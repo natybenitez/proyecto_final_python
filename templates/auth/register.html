@@ -1,4 +1,9 @@
-{% extends "writer.html" %}
+{% extends "base.html" %}
+
+{% block title %}
+Registro
+{% endblock title %}
+
 {% load bootstrap %}
 {% block content %}
 
@@ -7,22 +12,20 @@
     <div class=" row justify-content-center align-items-center  bg-light">
         <div class="col-auto">
             <br>
-            <h4>Por favor ingrese aqui los datos del nuevo autor</h4><br>
+            <h4>Ingrese los datos para crear su nuevo usuario</h4><br>
             <form action="" method="POST">
                 {% csrf_token %}
                 <table class="table table-borderless">
                     {{form.as_table}}
                 </table>
-            <br>
-            <div class=" container text-right">
-                <input class='btn btn-secondary pull-right' style="float:right;" type="submit" value="Aceptar"><br>
-            </div><br><br>
-        </div>  
+                <br>
+                <div class=" container text-right">
+                    <input class='btn btn-secondary pull-right' style="float:right;" type="submit" value="Aceptar"><br><br>
+                </div>
+        </div>
     </div>
 </div>
 <br>
 {% endif %}
 
 {% endblock %}
-
-
