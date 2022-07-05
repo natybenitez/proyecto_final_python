@@ -1,23 +1,33 @@
 {% extends "base.html" %}
 
+
 {% block content %}
 
-<h1>Aqui va el resultado de la busqueda</h1>
+{% for writer in writers %}
+<div class="col-md-6">
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+            <h3 class="mb-0">{{writer.name}} {{writer.lastname}}</h3>
+            <div class="mb-1 text-muted">{{writer.country.name}}</div>
+            <p class="card-text mb-auto">{{writer.bio |safe | truncatewords:"30" }}</p>
+            <a href="/writer-details/{{writer.id}}" class="stretched-link">Leer más</a>
+        </div>
+        <div class="thumbnail_wrapper" style="width: 200px; height: 250px">
+            <div >
+                <img class="img-thumbnail" src={{writer.image.url}}>
+            </div>
+        </div>
+    </div>
+</div>
+<h1>{{podcast}}</h1>
 
-    {% for writer in writers %}
-    <h2>{{writer.name}} {{writer.lastname}}</h2>
-    <h2></h2>
-    
-    <h2> {{writer.country}}</h2>
-    
-    
-   
-                {% if writer.web_url %}
-                    <p><a href="{{writer.web_url}}" target="_blank">{{writer.web_url}}</a></p>
-                {% endif %}
 
-    {% endfor %}
-
-    {{errors}}
+{% endfor %}
+{% if errors %}
+<div class="col-md-6 card w-100 text-center">
+    <br>
+    <h3 style="color:red">{{errors}}</h3><br>
+</div>
+{% endif %}
 
 {% endblock %}

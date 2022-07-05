@@ -23,7 +23,7 @@ def login_view(request):
 
             if user is not None:
                 login(request, user)
-                context = {'message':f'Bienvenido '}
+                context = {'message':f'Bienvenido/a '}
                 return render(request, 'index.html', context = context)
             else:
                 context = {'error_message':f'No hay un ningun usuario con esas credenciales'}
@@ -45,7 +45,6 @@ def logout_view(request):
     return redirect('index')
 
 # Register #
-
 def register_view(request):
     if request.method == 'POST':
         form = User_registration_form(request.POST)
@@ -70,15 +69,19 @@ def register_view(request):
 
 
 def index(request):
-    min_pk_writer = Writer.objects.all().order_by('id')[1].id
-    print(min_pk_writer)
-    max_pk_writer = Writer.objects.latest('id').id
-    random_writer = Writer.objects.filter(pk=random.randint(min_pk_writer, max_pk_writer))
+    # writer_list = Writer.objects.all()
+    # if len(writer_list) > 0:
+    #     min_pk_writer = Writer.objects.all().first('id').id
+    #     max_pk_writer = Writer.objects.latest('id').id
+    #     random_writer = Writer.objects.filter(pk=random.randint(min_pk_writer, max_pk_writer))
 
-    max_pk_podcast = Podcast.objects.latest('id').id
-    random_podcast = Podcast.objects.filter(pk=random.randint(1, max_pk_podcast))
-    context = {'podcasts': random_podcast, 'writers': random_writer}
-    return render(request, 'index.html',context=context)
+    #     max_pk_podcast = Podcast.objects.latest('id').id
+    #     random_podcast = Podcast.objects.filter(pk=random.randint(1, max_pk_podcast))
+    #     context = {'podcasts': random_podcast, 'writers': random_writer}
+    #     return render(request, 'index.html',context=context)
+    # else:
+        
+    return render(request, 'index.html')
 
 # @login_required
 # def contact(request):

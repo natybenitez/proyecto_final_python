@@ -1,0 +1,41 @@
+{% extends "writers/writer.html" %}
+
+{% block content %}
+
+{% if form %}
+<div class="container-sm" style="width:80%"><br>
+    <div class=" row justify-content-center align-items-center  bg-light">
+        <button type="button" class="btn-close btn-close-white" aria-label="Close"></button>
+        <div class="col-auto">
+            <br>
+            <h4>Por favor ingrese los datos que desea modificar</h4><br>
+            <form action="" method="POST" enctype="multipart/form-data">
+                {{ form.media.js }}
+                {{ form.media.css }}
+                {% csrf_token %}
+                <table class="table table-borderless">
+                    {{form.as_table}}
+                </table>
+                <br>
+                <div class="d-grid gap-2 d-md-block">
+                    <a href="/writer-details/{{writer.id}}" type="button" class="btn btn-danger">Cancelar</a>
+                    <a type="submit" class="btn btn-success" style="margin-left: 2rem;">Aceptar</a>
+                    
+                </div>
+                <br><br>
+        </div>
+    </div>
+</div>
+<br>
+
+{% elif new_writer %}
+
+    {% elif errors %}
+
+    <div style='color: red'>
+        {{errors}}
+    </div>
+
+{% endif %}
+
+{% endblock %}

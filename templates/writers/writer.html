@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+Autores
+{% endblock %}
+
+{% block content %}
+{% if message %}
+<ul class="messages">
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+</ul>
+{% endif %}
+<div class="row mb-2">
+  {% for writer in object_list %}
+  <div class="col-md-6">
+    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+      <div class="col p-4 d-flex flex-column position-static">
+        <h3 class="mb-0">{{writer.name|capfirst}} {{writer.lastname|capfirst}}</h3>
+        <div class="mb-1 text-muted">{{writer.country.name}}</div>
+        <p class="card-text mb-auto">{{writer.bio |safe | truncatewords:"30" }}</p>
+        <a href="/writer-details/{{writer.id}}" class="stretched-link">Leer más</a>
+      </div>
+      <div class="col-auto d-block d-lg-bloc">
+        <img class=" d-block " src={{writer.image.url}} width="200" height="250"> 
+      </div>
+      <!-- <div class="col-auto d-block d-lg-block">
+        <img src={{writer.image.url}} alt="..." class="img-thumbnail" width="200" height="200"> 
+      </div> -->
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+
+
+
+
+
+{% endblock %}

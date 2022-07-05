@@ -17,7 +17,6 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from base.views import index, contact, login_view, logout_view, register_view
 
-
 from django.conf import settings
 from django.conf.urls.static import static
 

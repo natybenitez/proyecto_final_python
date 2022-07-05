@@ -46,10 +46,12 @@ BASE_APPS = [
 MY_APPS = [
     'posts',
     'books',
+    'users',
 ]
 
 THIRD_PARTY_APPS = [
     'bootstrapform',
+    
 
 ]
 

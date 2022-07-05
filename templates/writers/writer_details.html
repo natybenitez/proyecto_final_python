@@ -1,0 +1,24 @@
+{% extends "writers/writer.html" %}
+
+{% block content %}
+
+<div class="col-md-6 card w-100">
+
+  <div class="col p-4 d-flex flex-column position-static">
+    <h3 class="mb-0">{{writer.name|capfirst}} {{writer.lastname|capfirst}}</h3>
+    <div class="mb-1 text-muted">{{writer.country.name}}</div>
+    {% if writer.web_url %}
+    <a class="mb-1 text-muted" href="{{writer.web_url}}" target="_blank">{{writer.web_url}}</a><br>
+    {% endif %}
+    <p class="card-text mb-auto">{{writer.bio |safe}}</p><br>
+    {% if request.user.is_authenticated %}
+    <div class="d-grid gap-2 d-md-block">
+      <a href="/delete-writer/{{writer.id}}/" type="button" class="btn btn-danger">Eliminar</a>
+      <a href="/update-writer/{{writer.id}}/" type="button" class="btn btn-success" style="margin-left: 2rem;">Editar</a>
+    </div>
+    {%endif%}
+  </div>
+
+</div>
+
+{% endblock %}
