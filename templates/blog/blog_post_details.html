@@ -1,0 +1,31 @@
+{% extends "blog/blog.html" %}
+
+{% block title %}
+Blog
+{% endblock title %}
+
+{% block content %}
+
+<div class="row g-5">
+
+    <div class="col-md-6 w-100"> <br>
+        <article class="blog-post">
+            <h2 class="blog-post-title mb-1">{{blog_post.title}}</h2>
+            <p class="blog-post-meta">{{blog_post.date_published | date:"d/m/Y"}} by {{blog_post.author}}</p>
+            <h6>{{blog_post.subtitle}}</h6><br>
+            <hr>
+            <p>{{blog_post.body |safe}}</p>
+
+            <br><br>
+        </article>
+        <hr>
+        {% if request.user.is_authenticated %}
+        <div class="d-grid gap-2 d-md-block">
+            <a href="/delete-blog-post/{{blog_post.id}}/" type="button" class="btn btn-danger">Eliminar</a>
+            <a href="/update-blog-post/{{blog_post.id}}/" type="button" class="btn btn-success"
+                style="margin-left: 2rem;">Editar</a>
+        </div>
+        {%endif%}
+    </div>
+</div>
+{% endblock %}

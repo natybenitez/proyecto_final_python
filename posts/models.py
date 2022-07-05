@@ -4,7 +4,7 @@ from django.utils import timezone
 
 from ckeditor_uploader.fields import RichTextUploadingField
 
-class Article(models.Model):
+class Blog_post(models.Model):
 
     # Article status constants
     DRAFTED = "DRAFTED"
@@ -16,15 +16,15 @@ class Article(models.Model):
         (PUBLISHED, 'Publish'),
     )
 
-    title = models.CharField(max_length=200, null=False, blank=False)
-    subtitle = models.CharField(max_length=200)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='article')
-    body = RichTextUploadingField(blank=True)
+    title = models.CharField(max_length=200, null=False, blank=False, verbose_name='título',)
+    subtitle = models.CharField(max_length=200, verbose_name='subtítulo')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_post', verbose_name='autor')
+    body = RichTextUploadingField(blank=True, verbose_name='post',)
     date_published = models.DateTimeField(null=True, blank=True,
-                                          default=timezone.now)
+                                          default=timezone.now, verbose_name='fecha de publucación')
     status = models.CharField(max_length=10, choices=STATUS_CHOICES,
-                              default='DRAFT')
-    deleted = models.BooleanField(default=False)
+                              default='DRAFT', verbose_name='estado')
+    deleted = models.BooleanField(default=False, verbose_name='oculto')
 
     class Meta:
         ordering = ('-date_published',)
@@ -33,11 +33,12 @@ class Article(models.Model):
 
     def __str__(self):
         return "%s %s" % (self.title, self.author)
+        
 
 class Podcast(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name='nombre')
     writer = models.ForeignKey('books.Writer', on_delete=models.CASCADE, related_name='podcast', default=None)
-    iframe = models.CharField(max_length=1000,null=False, blank=False)
+    iframe = models.CharField(max_length=5000,null=False, blank=False)
 
     class Meta:
         verbose_name = 'podcast'
@@ -56,4 +57,4 @@ class Interview(models.Model):
         verbose_name_plural = 'entrevistas'
 
     def __str__(self):
-        return "%s %s" % (self.name)
+        return "%s" % (self.name)

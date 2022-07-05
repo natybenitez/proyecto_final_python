@@ -1,17 +1,15 @@
-{% extends "base.html" %}
+{% extends "blog/blog.html" %}
 
 {% block title %}
-Login
+Blog
 {% endblock title %}
 
 {% block content %}
-
-{% if form %}
-<div class="container-sm" style="width:80%"><br>
-    <div class=" row justify-content-center align-items-center  bg-light">
+<div class="container-sm" style="width:100%"><br>
+    <div class=" row bg-light">
         <div class="col-auto">
             <br>
-            <h4>Por favor complete los campos para iniciar sesión</h4><br>
+            <h4>Por favor ingrese aqui su nueva entrada de blog</h4><br>
             <form action="" method="POST" enctype="multipart/form-data">
                 {{ form.media.js }}
                 {{ form.media.css }}
@@ -21,12 +19,10 @@ Login
                 </table>
                 <br>
                 <div class=" container text-right">
-                    <input class='btn btn-secondary pull-right' style="float:right;" type="submit" value="Ingresar"><br>
+                    <input class='btn btn-secondary pull-right' style="float:right;" type="submit" value="Aceptar"><br>
                 </div><br><br>
         </div>
     </div>
 </div>
 <br>
-{% endif %}
-
 {% endblock %}

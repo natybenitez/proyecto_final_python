@@ -1,5 +1,5 @@
 from django.contrib import admin
-from posts.models import Podcast, Article, Interview
+from posts.models import Podcast, Blog_post, Interview
 
 #admin.site.register(Posts)
 
@@ -7,8 +7,8 @@ from posts.models import Podcast, Article, Interview
 class PodcastAdmin(admin.ModelAdmin): 
     list_display= ['name', 'writer']
 
-@admin.register(Article)
-class ArticleAdmin(admin.ModelAdmin): 
+@admin.register(Blog_post)
+class Blog_postAdmin(admin.ModelAdmin): 
     list_display= ['title', 'author','date_published', 'status']
 
 @admin.register(Interview)

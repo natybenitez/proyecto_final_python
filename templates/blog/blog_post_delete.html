@@ -1,0 +1,20 @@
+{% extends "blog/blog.html" %}
+
+{% block title %}
+Blog
+{% endblock title %}
+
+{% block content %}
+
+<div class="col-md-6 card w-100 text-center">
+    <br>
+    <h3>Estas por eliminar la entrada: </h3>
+    <h3>{{blog_post.title | truncatewords:"8"}}..., estas seguro?</h3><br>
+    <form action="/delete-blog-post/{{blog_post.id}}}/" method="POST">
+        {% csrf_token %}
+        <a href="/blog-details/{{blog_post.id}}" type="button" class="btn btn-secondary btn-sm">Cancelar</a>
+        <a type="submit" class="btn btn-danger btn-sm" style="margin-left: 2rem;">Eliminar</a>
+    </form>
+    <br>
+</div>
+{% endblock %}
