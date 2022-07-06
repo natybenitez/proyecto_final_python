@@ -48,14 +48,18 @@ class Writer_update(UpdateView):
 
 # BOOKS #
 ## Books list ##
-def books(request):
-    books = Book.objects.all()
-    context = {'books': books}
-    return render(request, 'books.html', context=context)
+# def books(request):
+#     books = Book.objects.all()
+#     context = {'books': books}
+#     return render(request, 'books.html', context=context)
 
 class Books(ListView):
     model = Book
     template_name ='books/books.html'
+
+class Books_details(DetailView):
+    model = Books
+    template_name ='books/book_details.html'
 
 
 

@@ -1,0 +1,15 @@
+{% extends "books/books.html" %}
+
+{% block content %}
+
+<div class="col-md-6 card w-100">
+
+  <div class="col p-4 d-flex flex-column position-static">
+    <h3 class="mb-0">{{book.title|capfirst}}</h3>
+              <div class="mb-1 text-muted">{{book.writer| title}} - {{book.year_published}}</div>
+              <p class="card-text mb-auto">{{book.summary |safe | truncatewords:"30" }}</p>
+  </div>
+
+</div>
+
+{% endblock %}
