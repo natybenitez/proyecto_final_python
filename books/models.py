@@ -52,7 +52,7 @@ class Book(models.Model):
         verbose_name_plural = 'libros'
 
     def __str__(self):
-        return self.title
+        return "%s " % (self.title)
 
 
 class Publisher(models.Model):

@@ -1,8 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
-from books.models import Writer
-from posts.models import Podcast
+from books.models import Writer, Book
+from posts.models import Podcast, Blog_post
+from django.db.models import Q
 
 from django.contrib.auth import authenticate, login, logout
 from base.forms import User_registration_form
@@ -68,27 +69,43 @@ def register_view(request):
         return render(request, 'auth/register.html', context =context)
 
 
+# INDEX #
+
 def index(request):
-    # writer_list = Writer.objects.all()
-    # if len(writer_list) > 0:
-    #     min_pk_writer = Writer.objects.all().first('id').id
-    #     max_pk_writer = Writer.objects.latest('id').id
-    #     random_writer = Writer.objects.filter(pk=random.randint(min_pk_writer, max_pk_writer))
+    writer = Writer.objects.all().latest('id')
+    book = Book.objects.all().latest('id')
+    post = Blog_post.objects.all().latest('id')
+    print(post)
+    print(writer)
+    context = {'writer': writer, 'book': book, 'post': post}
+  
+    return render(request, 'index.html', context=context)
 
-    #     max_pk_podcast = Podcast.objects.latest('id').id
-    #     random_podcast = Podcast.objects.filter(pk=random.randint(1, max_pk_podcast))
-    #     context = {'podcasts': random_podcast, 'writers': random_writer}
-    #     return render(request, 'index.html',context=context)
-    # else:
-        
-    return render(request, 'index.html')
 
-# @login_required
-# def contact(request):
-#     return render(request, 'contact.html')
+# CONTACT #
 
 def contact(request):       
     if request.user.is_authenticated and request.user.is_superuser:
         return render(request, 'contact.html')
     else:
         return redirect('login')
+
+
+# SEARCH BAR #
+
+def search_view(request):
+    word_searched = request.GET['search'].lower()
+    results_writers = Writer.objects.filter( Q(name=word_searched)) or Writer.objects.filter(Q(lastname=word_searched))
+    results_podcasts = Podcast.objects.filter(Q(writer__name__icontains= word_searched)) or Podcast.objects.filter(Q(writer__lastname__icontains= word_searched))
+    results_books = Book.objects.filter(Q(writer__name__icontains= word_searched)) or Book.objects.filter(Q(writer__lastname__icontains= word_searched))
+    if results_writers.exists() or results_podcasts.exists() or results_books. exists():
+        context = {'writers': results_writers,'podcasts':results_podcasts, 'books': results_books}
+    else:
+        context = {'errors':f'Disculpe, no se encontraron registros con la palabra:  "{word_searched}"'}
+        
+    return render(request, 'search.html', context=context)
+
+# ABOUT #
+
+def about(request):
+    return render(request, 'about.html')

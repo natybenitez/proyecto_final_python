@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 ## Blog_posts list ##
 class Blog_posts(ListView):
     model = Blog_post
-    template_name ='blog/blog.html'
+    template_name = 'blog/blog.html'
 
 ## Blog_post details ##
 class Blog_post_details(DetailView):
@@ -26,7 +26,7 @@ class Blog_post_new(LoginRequiredMixin, CreateView):
         return reverse('blog_post_details', kwargs={'pk': self.object.pk}) 
 
 ## Delete Blog_post ##
-class Blog_post_delete(LoginRequiredMixin,DeleteView):
+class Blog_post_delete(LoginRequiredMixin, DeleteView):
     model = Blog_post
     template_name = 'blog/blog_post_delete.html'
 

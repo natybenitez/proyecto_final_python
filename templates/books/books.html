@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    
+
+    <div class="row mb-2">
+        {% for book in object_list %}
+        <div class="col-md-6">
+          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+              <h3 class="mb-0">{{book.title|capfirst}}</h3>
+              <div class="mb-1 text-muted">{{book.writer| title}} - {{book.year_published}}</div>
+              <p class="card-text mb-auto">{{book.summary |safe | truncatewords:"30" }}</p>
+              <a href="/writer-details/{{writer.id}}" class="stretched-link">Leer más</a>
+            </div>
+            <div class="col-auto d-block d-lg-bloc">
+              <img class=" d-block " src={{book.image.url}} width="200" height="250"> 
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+{% endblock %}
+
+

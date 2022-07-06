@@ -27,7 +27,6 @@ class Blog_post(models.Model):
     deleted = models.BooleanField(default=False, verbose_name='oculto')
 
     class Meta:
-        ordering = ('-date_published',)
         verbose_name = 'entrada'
         verbose_name_plural = 'entradas'
 
